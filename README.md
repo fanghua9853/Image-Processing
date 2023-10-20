@@ -1,4 +1,4 @@
-#About me!
+# About me!
 
 This image processing tool provides GUI for users to alternate the image through filters and resolution methods
 implemented in Java.
