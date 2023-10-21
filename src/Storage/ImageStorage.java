@@ -23,14 +23,29 @@ public class ImageStorage {
         try {
             img = ImageIO.read(pic);
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
         imgArray = new int[img.getWidth()][img.getHeight()];
         this.getImageArray();
         //System.out.println("debug");
     }
-
+    //Constructor
+    public ImageStorage(BufferedImage pic,int[][] process) {
+        try {
+            img = pic;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        imgArray = new int[process.length][];
+        for(int i=0;i<process.length;i++){
+            imgArray[i]=process[i].clone();
+        }
+        //System.out.println("debug");
+    }
+    public int[][] getProcessedArray()
+    {
+        return processedArray;
+    }
 
     //Change buffer image into array and get gray scale value
     public void getImageArray(){
@@ -146,6 +161,6 @@ public class ImageStorage {
                 processedArray[i][j]=(int) Math.round(sm.get(processedArray[i][j]));
             }
         }
-    }
+    } 
 
 }

@@ -139,6 +139,7 @@ public class MyFrame extends JFrame{
         loadBt.setBounds(10,80,100,40);
         transButton = new JButton("Transform");
         transButton.setBounds(10, 120, 100, 40);
+        transButton.addActionListener(act);
         histogramButton = new JButton(" Local Histogram Equalization");
         histogramButton.setPreferredSize(new Dimension(300, 50));
         histogramButton2 = new JButton("Global Histogram Equalization");
@@ -170,16 +171,16 @@ public class MyFrame extends JFrame{
         JMenuBar menuBar = new JMenuBar();
         spatialMenu = new JMenu("Spatial Reselution");
         // spatialMenu.addMenuListener(menuAction);
-        m1 = new JMenuItem("32x32");
+        m1 = new JMenuItem("1x");
         m1.addActionListener(act);
-        m2 = new JMenuItem("64x64");
-        m3 = new JMenuItem("128x128");
-        m4 = new JMenuItem("256x256");
-        m5 = new JMenuItem("512x512");
+        m2 = new JMenuItem("2x");
+        m3 = new JMenuItem("3x");
+        m4 = new JMenuItem("4x");
+        // m5 = new JMenuItem("512x512");
         m2.addActionListener(act);
         m3.addActionListener(act);
         m4.addActionListener(act);
-        m5.addActionListener(act);
+        // m5.addActionListener(act);
         nearestButton.addActionListener(act);
         linearButton.addActionListener(act);
         bilinerButton.addActionListener(act);
@@ -202,7 +203,7 @@ public class MyFrame extends JFrame{
         spatialMenu.add(m2);
         spatialMenu.add(m3);
         spatialMenu.add(m4);
-        spatialMenu.add(m5);
+        // spatialMenu.add(m5);
         menuBar.add(spatialMenu);
         add(loadBt);
         add(transButton);
@@ -285,21 +286,54 @@ public class MyFrame extends JFrame{
             }
             else if(e.getSource() == m1)
             {
-                imageStorage.subSample(4);
+                if(upButton.isSelected()){
+                    if(nearestButton.isSelected()){
+                        imageStorage.upSample("Nearstneighbor", 1);
+                    }else if(linearButton.isSelected()){
+                        imageStorage.upSample("linear", 1);
+                    }else if(bilinerButton.isSelected()){
+                        imageStorage.upSample("bilinear", 1);
+                    }
+                }
+                else if(subButton.isSelected()){
+                imageStorage.subSample(1);
+                }
                 BufferedImage bi = imageStorage.getImagefromProcessedArray();
                 label1.setIcon(new ImageIcon(bi));
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
-                System.out.println(bi.getWidth());
+                 System.out.println(bi.getWidth());
             }
             else if(e.getSource() == m2){
-                imageStorage.subSample(3);
+                if(upButton.isSelected()){
+                    if(nearestButton.isSelected()){
+                        imageStorage.upSample("Nearstneighbor", 2);
+                    }else if(linearButton.isSelected()){
+                        imageStorage.upSample("linear", 2);
+                    }else if(bilinerButton.isSelected()){
+                        imageStorage.upSample("bilinear", 2);
+                    }
+                }
+                else if(subButton.isSelected()){
+                imageStorage.subSample(2);
+                }
                 BufferedImage bi = imageStorage.getImagefromProcessedArray();
                 label1.setIcon(new ImageIcon(bi));
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
                  System.out.println(bi.getWidth());
             }
             else if(e.getSource() == m3){
-                imageStorage.subSample(2);
+                if(upButton.isSelected()){
+                    if(nearestButton.isSelected()){
+                        imageStorage.upSample("Nearstneighbor", 3);
+                    }else if(linearButton.isSelected()){
+                        imageStorage.upSample("linear", 3);
+                    }else if(bilinerButton.isSelected()){
+                        imageStorage.upSample("bilinear", 3);
+                    }
+                }
+                else if(subButton.isSelected()){
+                imageStorage.subSample(3);
+                }
                 BufferedImage bi = imageStorage.getImagefromProcessedArray();
                 label1.setIcon(new ImageIcon(bi));
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
@@ -307,20 +341,51 @@ public class MyFrame extends JFrame{
             }
 
             else if(e.getSource() == m4){
-                imageStorage.subSample(1);
+                if(upButton.isSelected()){
+                    if(nearestButton.isSelected()){
+                        imageStorage.upSample("Nearstneighbor", 4);
+                    }else if(linearButton.isSelected()){
+                        imageStorage.upSample("linear", 4);
+                    }else if(bilinerButton.isSelected()){
+                        imageStorage.upSample("bilinear", 4);
+                    }
+                }
+                else if(subButton.isSelected()){
+                imageStorage.subSample(4);
+                }
                 BufferedImage bi = imageStorage.getImagefromProcessedArray();
                 label1.setIcon(new ImageIcon(bi));
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
                  System.out.println(bi.getWidth());
             }
-            else if(e.getSource() == m5){
+            // else if(e.getSource() == m5){
                 
-                BufferedImage bi = imageStorage.getBufferedImage();
-                label1.setIcon(new ImageIcon(bi));
-                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
-                 System.out.println(bi.getWidth());
+            //     if(upButton.isSelected()){
+            //         if(nearestButton.isSelected()){
+            //             imageStorage.upSample("Nearstneighbor", 5);
+            //         }else if(linearButton.isSelected()){
+            //             imageStorage.upSample("linear", 5);
+            //         }else if(bilinerButton.isSelected()){
+            //             imageStorage.upSample("bilinear", 5);
+            //         }
+            //     }
+            //     else{
+            //     imageStorage.subSample(5);
+            //     }
+            //     BufferedImage bi = imageStorage.getImagefromProcessedArray();
+            //     label1.setIcon(new ImageIcon(bi));
+            //     label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            //      System.out.println(bi.getWidth());
+            // }
+            else if(e.getSource() == transButton){
+                imageStorage = new ImageStorage(imageStorage.getImagefromProcessedArray(),imageStorage.getProcessedArray());
+                BufferedImage bi =imageStorage.getBufferedImage();
+                picLabel.setIcon(new ImageIcon(bi));
+                picLabel.setBounds(50,imageHeight,bi.getWidth(),bi.getHeight());
+                //m4.setText(imageStorage.getBufferedImage().getWidth()+"x"+imageStorage.getBufferedImage().getWidth());
+                System.out.println("action");
+                label1.setIcon(null);
             }
-
             
         }
     }
