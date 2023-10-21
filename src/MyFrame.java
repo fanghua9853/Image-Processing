@@ -28,9 +28,10 @@ public class MyFrame extends JFrame{
     JRadioButton linearButton;
     JRadioButton bilinerButton;
     ButtonGroup group;
+    ButtonGroup groupSampling;
     JButton loadBt;
-    JButton upButton;
-    JButton subButton;
+    JRadioButton upButton;
+    JRadioButton subButton;
     JButton transButton;
     JLabel label1;
     JLabel picLabel;
@@ -72,7 +73,7 @@ public class MyFrame extends JFrame{
         label1 = new JLabel();
         picLabel = new JLabel();
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER,0,50));
-        JPanel panel2 = new JPanel(null);
+        JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER,0,50));
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER,0,60));
         JPanel panel4 = new JPanel(new FlowLayout(FlowLayout.CENTER,0,50));
         JPanel panel5 = new JPanel();
@@ -121,12 +122,14 @@ public class MyFrame extends JFrame{
         bitBox7 = new JCheckBox("7 bit");
 
         group = new ButtonGroup();
+        groupSampling = new ButtonGroup();
         highBoostButton = new JButton("High Boosting Filter");
         sharpenButton = new JButton("Sharpen Filter");
         smoothButton = new JButton("Smooth Filter");
         medianButton = new JButton("Median Filter");
-        upButton = new JButton("Upsampling");
-        subButton = new JButton("Subsampling");
+        upButton = new JRadioButton("Upsampling");
+        upButton.setSelected(true);
+        subButton = new JRadioButton("Subsampling");
         nearestButton = new JRadioButton("Nearest");
         nearestButton.setSelected(true);
         linearButton = new JRadioButton("Linear ");
@@ -180,8 +183,8 @@ public class MyFrame extends JFrame{
         nearestButton.addActionListener(act);
         linearButton.addActionListener(act);
         bilinerButton.addActionListener(act);
-        upButton.setBounds(80, 80, 100, 50);
-        subButton.setBounds(180, 80, 100, 50);
+        upButton.setBounds(80, 80, 90, 50);
+        subButton.setBounds(180, 80, 200, 50);
         menuBar.setBounds(380, 80, 150, 50);
         nearestButton.setBounds(580, 100, 100, 50);
         linearButton.setBounds(660, 100, 100, 50);
@@ -193,6 +196,8 @@ public class MyFrame extends JFrame{
         group.add(nearestButton);
         group.add(linearButton);
         group.add(bilinerButton);
+        groupSampling.add(upButton);
+        groupSampling.add(subButton);
         spatialMenu.add(m1);
         spatialMenu.add(m2);
         spatialMenu.add(m3);
@@ -201,8 +206,6 @@ public class MyFrame extends JFrame{
         menuBar.add(spatialMenu);
         add(loadBt);
         add(transButton);
-        add(upButton);
-        add(subButton);
         add(labeltxtOriginal);
         add(labeltxtProcessed);
 
@@ -253,6 +256,8 @@ public class MyFrame extends JFrame{
         nearestButton.setVisible(true);
         linearButton.setVisible(true);
         bilinerButton.setVisible(true);
+        upButton.setVisible(true);
+        subButton.setVisible(true);
         setVisible(true);
 
        
