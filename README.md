@@ -5,9 +5,11 @@ implemented in Java.
 
 Functions/Features:
 ```
- * Load/Read image
+ * Load/Read image from local laptop
  * Grayscale Resolution
  * Spatial Resolution(upsampling & subsampling)
+ * Smoothing Box Filters
+ * Median Filters
  * bitplane changing(MSB/LSB) 
  * Output/Display Processed image
 
