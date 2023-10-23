@@ -126,7 +126,9 @@ public class MyFrame extends JFrame{
         highBoostButton = new JButton("High Boosting Filter");
         sharpenButton = new JButton("Sharpen Filter");
         smoothButton = new JButton("Smooth Filter");
+        smoothButton.addActionListener(act);
         medianButton = new JButton("Median Filter");
+        medianButton.addActionListener(act);
         upButton = new JRadioButton("Upsampling");
         upButton.setSelected(true);
         subButton = new JRadioButton("Subsampling");
@@ -270,7 +272,14 @@ public class MyFrame extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == loadBt){
-                imageStorage = new ImageStorage(new File("src/Lena.png"));
+                File f= null;
+                JFileChooser chooser = new JFileChooser();
+                // optionally set chooser options ...
+                if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                    f = chooser.getSelectedFile();
+                    // read  and/or display the file somehow. ....
+                } 
+                imageStorage = new ImageStorage(f);
                 BufferedImage bi =imageStorage.getBufferedImage();
                 picLabel.setIcon(new ImageIcon(bi));
                 picLabel.setBounds(50,imageHeight,bi.getWidth(),bi.getHeight());
@@ -358,25 +367,7 @@ public class MyFrame extends JFrame{
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
                  System.out.println(bi.getWidth());
             }
-            // else if(e.getSource() == m5){
-                
-            //     if(upButton.isSelected()){
-            //         if(nearestButton.isSelected()){
-            //             imageStorage.upSample("Nearstneighbor", 5);
-            //         }else if(linearButton.isSelected()){
-            //             imageStorage.upSample("linear", 5);
-            //         }else if(bilinerButton.isSelected()){
-            //             imageStorage.upSample("bilinear", 5);
-            //         }
-            //     }
-            //     else{
-            //     imageStorage.subSample(5);
-            //     }
-            //     BufferedImage bi = imageStorage.getImagefromProcessedArray();
-            //     label1.setIcon(new ImageIcon(bi));
-            //     label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
-            //      System.out.println(bi.getWidth());
-            // }
+            
             else if(e.getSource() == transButton){
                 imageStorage = new ImageStorage(imageStorage.getImagefromProcessedArray(),imageStorage.getProcessedArray());
                 BufferedImage bi =imageStorage.getBufferedImage();
@@ -386,7 +377,20 @@ public class MyFrame extends JFrame{
                 System.out.println("action");
                 label1.setIcon(null);
             }
-            
+            else if(e.getSource() == medianButton){
+                imageStorage.Filter(Integer.valueOf(medianFilterTxt.getText()),"median");
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+                 System.out.println(bi.getWidth());
+            }
+            else if(e.getSource() == smoothButton){
+                imageStorage.Filter(Integer.valueOf(smoothFilterTxt.getText()),"box");
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+                 System.out.println(bi.getWidth());
+            }
         }
     }
 

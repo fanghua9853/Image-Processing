@@ -10,7 +10,9 @@ import java.awt.image.WritableRaster;
 import java.awt.image.BufferedImage;
 
 import Algo.BitChange;
+import Algo.Filters;
 import Algo.GrayScaleResolution;
+import Algo.Median;
 import Algo.SpatialResolution;
 
 public class ImageStorage {
@@ -72,7 +74,6 @@ public class ImageStorage {
             ImageIO.write(getImagefromProcessedArray(), "png", f);
 
         } catch (Exception e) {
-            // TODO: handle exception
             System.out.print(e);
         }
     }
@@ -137,6 +138,11 @@ public class ImageStorage {
                 var.biLinearInterpolation(processedArray);
             }
         }
+    }
+    public void Filter(int n,String s){
+        Filters m = new Filters(s);
+        processedArray = new int[imgArray.length][imgArray[0].length];
+        m.slideWindow(n, imgArray, processedArray);
     }
 
 

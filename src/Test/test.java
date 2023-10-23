@@ -8,7 +8,7 @@ import Storage.ImageStorage;
 
 public class test {
     public static void main(String[] args) {
-        ImageStorage var = new ImageStorage(new File("src/Lena2.png"));
+        ImageStorage var = new ImageStorage(new File("src/Median.png"));
         System.out.println("ran");
         Set<Integer> testSet = new HashSet<>();
         testSet.add(7);
@@ -19,7 +19,7 @@ public class test {
         // testSet.add(2);
         // testSet.add(0);
         // var.bitLevelResolution(testSet);
-        var.upSample("Nearstneighbor",2);;  
+        var.medianFilter(7);
         var.saveProcessedImage("src/test.png");
         
     }
