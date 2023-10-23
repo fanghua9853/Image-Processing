@@ -13,6 +13,14 @@ Functions/Features:
 
 
 ```
+<img width="1033" alt="Screen Shot 2023-10-23 at 01 15 40" src="https://github.com/fionaguCode/Image-Processing/assets/42789126/d47008bf-ec48-46da-9ed2-f8f866a2efea">
 
-<img width="1186" alt="Screen Shot 2023-10-16 at 14 38 52" src="https://github.com/fanghua9853/Image-Processing/assets/42789126/71bb4282-e4e6-484e-a4bc-9debca1dd180">
+<img width="1042" alt="Screen Shot 2023-10-23 at 01 15 00" src="https://github.com/fionaguCode/Image-Processing/assets/42789126/239e7452-f76e-4e01-a786-8416fd415866">
+
+<img width="1034" alt="Screen Shot 2023-10-23 at 01 15 13" src="https://github.com/fionaguCode/Image-Processing/assets/42789126/432d744a-3fbe-4a59-b27f-5a1c1e8519dd">
+
+<img width="1098" alt="Screen Shot 2023-10-23 at 01 14 34" src="https://github.com/fionaguCode/Image-Processing/assets/42789126/d91b9c47-21bb-465d-8b68-e03473cdaedd">
+
+
+
 
