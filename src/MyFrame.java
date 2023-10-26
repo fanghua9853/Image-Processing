@@ -13,6 +13,9 @@ import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
+import Algo.Box;
+import Algo.Laplacin;
+import Algo.Median;
 import Storage.ImageStorage;
 
 public class MyFrame extends JFrame{
@@ -124,7 +127,9 @@ public class MyFrame extends JFrame{
         group = new ButtonGroup();
         groupSampling = new ButtonGroup();
         highBoostButton = new JButton("High Boosting Filter");
+        highBoostButton.addActionListener(act);
         sharpenButton = new JButton("Sharpen Filter");
+        sharpenButton.addActionListener(act);
         smoothButton = new JButton("Smooth Filter");
         smoothButton.addActionListener(act);
         medianButton = new JButton("Median Filter");
@@ -146,6 +151,7 @@ public class MyFrame extends JFrame{
         histogramButton.setPreferredSize(new Dimension(300, 50));
         histogramButton2 = new JButton("Global Histogram Equalization");
         histogramButton2.setPreferredSize(new Dimension(300, 50));
+        histogramButton2.addActionListener(act);
         grayScaleTXT = new JTextField("8");
         grayScaleTXT.setPreferredSize(new Dimension(100, 50));
         HistrogramTxt = new JTextField("3");
@@ -378,18 +384,38 @@ public class MyFrame extends JFrame{
                 label1.setIcon(null);
             }
             else if(e.getSource() == medianButton){
-                imageStorage.Filter(Integer.valueOf(medianFilterTxt.getText()),"median");
+                imageStorage.Filter(new Median(),Integer.valueOf(medianFilterTxt.getText()));
                 BufferedImage bi = imageStorage.getImagefromProcessedArray();
                 label1.setIcon(new ImageIcon(bi));
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
                  System.out.println(bi.getWidth());
             }
             else if(e.getSource() == smoothButton){
-                imageStorage.Filter(Integer.valueOf(smoothFilterTxt.getText()),"box");
+                imageStorage.Filter(new Box(),Integer.valueOf(smoothFilterTxt.getText()));
                 BufferedImage bi = imageStorage.getImagefromProcessedArray();
                 label1.setIcon(new ImageIcon(bi));
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
                  System.out.println(bi.getWidth());
+            }
+            else if(e.getSource() == sharpenButton){
+                imageStorage.Filter(new Laplacin(Integer.valueOf(sharpenFilterTxt.getText())),Integer.valueOf(sharpenFilterTxt.getText()));
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() == histogramButton2){
+                imageStorage.HEQ();
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            
+            }
+            else if(e.getSource() == highBoostButton){
+                imageStorage.highBoost(Integer.valueOf(highBoostingTxt2.getText()),Integer.valueOf(highBoostingTxt.getText()));
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            
             }
         }
     }

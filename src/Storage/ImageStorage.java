@@ -9,11 +9,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.WritableRaster;
 import java.awt.image.BufferedImage;
 
-import Algo.BitChange;
-import Algo.Filters;
-import Algo.GrayScaleResolution;
-import Algo.Median;
-import Algo.SpatialResolution;
+import Algo.*;
 
 public class ImageStorage {
     BufferedImage img;
@@ -139,10 +135,23 @@ public class ImageStorage {
             }
         }
     }
-    public void Filter(int n,String s){
-        Filters m = new Filters(s);
+    public void Filter(filterInterface s,int n){
+        Filters m = new Filters(s,n);
         processedArray = new int[imgArray.length][imgArray[0].length];
-        m.slideWindow(n, imgArray, processedArray);
+        m.slideWindow(imgArray, processedArray);
+    }
+
+    public void HEQ(){
+        HistogramEQ heq = new HistogramEQ();
+         processedArray = new int[imgArray.length][imgArray[0].length];
+         heq.equalize(imgArray, processedArray);
+    }
+
+    public void highBoost(int boost, int n){
+        Filter(new Box(),n);
+       highBoosting hb = new highBoosting();
+       hb.Calculate(imgArray, boost, processedArray, processedArray);
+       
     }
 
 

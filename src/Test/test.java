@@ -19,7 +19,7 @@ public class test {
         // testSet.add(2);
         // testSet.add(0);
         // var.bitLevelResolution(testSet);
-        var.medianFilter(7);
+        //var.medianFilter(7);
         var.saveProcessedImage("src/test.png");
         
     }
