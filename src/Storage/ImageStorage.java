@@ -151,7 +151,7 @@ public class ImageStorage {
         Filter(new Box(),n);
        highBoosting hb = new highBoosting();
        hb.Calculate(imgArray, boost, processedArray, processedArray);
-       
+
     }
 
 
@@ -169,7 +169,10 @@ public class ImageStorage {
         for(int i=0; i <sm.size()-1; i++){
             sm.put(s[i],i*IntSpace);
         }
-        sm.put(s[s.length-1],255.0);  
+        if(s.length !=1){
+            sm.put(s[s.length-1],255.0);    
+        }
+         
         System.out.println(sm.toString());
         for(int i = 0; i< processedArray.length; i++){
             for(int j=0; j< processedArray[0].length; j++){

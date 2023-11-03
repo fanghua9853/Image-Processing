@@ -8,14 +8,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.HashSet;
 
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
 import Algo.Box;
+import Algo.GeoMean;
 import Algo.Laplacin;
+import Algo.Max;
 import Algo.Median;
+import Algo.Midpoint;
+import Algo.Min;
 import Storage.ImageStorage;
 
 public class MyFrame extends JFrame{
@@ -46,6 +51,11 @@ public class MyFrame extends JFrame{
     JButton sharpenButton;
     JButton smoothButton;
     JButton medianButton;
+    JButton bitButton;
+    JButton geoButton;
+    JButton maxButton;
+    JButton minButton;
+    JButton midpointButton;
     JMenu spatialMenu;
     JMenuItem m1;
     JMenuItem m2;
@@ -59,6 +69,14 @@ public class MyFrame extends JFrame{
     JTextField medianFilterTxt;
     JTextField sharpenFilterTxt;
     JTextField smoothFilterTxt;
+    JTextField geoFilterTxt;
+    JTextField maxFilterTxt;
+    JTextField minFilterTxt;
+    JTextField midPointFilterTxt;
+
+
+
+    
 
     ImageStorage imageStorage;
     
@@ -84,13 +102,31 @@ public class MyFrame extends JFrame{
         JPanel medianPanel = new JPanel();
         JPanel smoothingPanel = new JPanel();
         JPanel sharpenPanel = new JPanel();
+        JPanel ArithmeticMeanPanel = new JPanel();
+        JPanel GeometricMeanPanel = new JPanel();
+        JPanel HarmonicMeanPanel = new JPanel();
+        JPanel ContraharmonicMeanPanel = new JPanel();
+        JPanel MaxPanel = new JPanel();
+        JPanel MinPanel = new JPanel();
+        JPanel MidpointPanel = new JPanel();
+        JPanel AlphatrimmedMeanPanel = new JPanel();
 
 
         JTabbedPane tabsFilter = new JTabbedPane();
+        JTabbedPane tabsFilter2 = new JTabbedPane();
         tabsFilter.add("Smoothing Fliter",smoothingPanel);
         tabsFilter.add("Median Fiter", medianPanel);
         tabsFilter.add("Sharpening Laplacin Fiter", sharpenPanel);
         tabsFilter.add("High Boosting Fiter", highBoostingPanel);
+        tabsFilter2.add("Geometric Mean",GeometricMeanPanel);
+        tabsFilter2.add("Arithmetic Mean", ArithmeticMeanPanel);
+        tabsFilter2.add("Harmonic Mean",HarmonicMeanPanel);
+        tabsFilter2.add("Contraharmonic Mean",ContraharmonicMeanPanel);
+        tabsFilter2.add("Max",MaxPanel);
+        tabsFilter2.add("Min",MinPanel);
+        tabsFilter2.add("Midpoint",MidpointPanel);
+        tabsFilter2.add("Alpha-trimmed Mean",AlphatrimmedMeanPanel);
+
         
 
         JLabel labeltxtInput = new JLabel("Input: ");
@@ -113,7 +149,8 @@ public class MyFrame extends JFrame{
         tabs.add("Spatial Resolution",panel2);
         tabs.add("Bit Plane ",panel3);
         tabs.add("Histogram Equalization",panel4);
-        tabs.add("Filters",tabsFilter);
+        tabs.add("Spatial Filters",tabsFilter);
+        tabs.add("Image Restoration Filters",tabsFilter2);
 
         bitBox0 = new JCheckBox("0 bit");
         bitBox1 = new JCheckBox("1 bit");
@@ -123,9 +160,21 @@ public class MyFrame extends JFrame{
         bitBox5 = new JCheckBox("5 bit");
         bitBox6 = new JCheckBox("6 bit");
         bitBox7 = new JCheckBox("7 bit");
+        bitButton = new JButton("Bit change");
+        bitButton.addActionListener(act);
 
         group = new ButtonGroup();
         groupSampling = new ButtonGroup();
+
+
+        maxButton = new JButton("Max Filter");
+        maxButton.addActionListener(act);
+        minButton = new JButton("Min Filter");
+        minButton.addActionListener(act);
+        midpointButton = new JButton("Midpoint Filter");
+        midpointButton.addActionListener(act);
+        geoButton = new JButton("Geometric Mean");
+        geoButton.addActionListener(act);
         highBoostButton = new JButton("High Boosting Filter");
         highBoostButton.addActionListener(act);
         sharpenButton = new JButton("Sharpen Filter");
@@ -166,6 +215,16 @@ public class MyFrame extends JFrame{
         sharpenFilterTxt.setPreferredSize(new Dimension(100, 40));
         smoothFilterTxt = new JTextField(2);
         smoothFilterTxt.setPreferredSize(new Dimension(100, 40));
+        geoFilterTxt = new JTextField(2);
+        geoFilterTxt.setPreferredSize(new Dimension(100, 40));
+        maxFilterTxt = new JTextField(2);
+        maxFilterTxt.setPreferredSize(new Dimension(100, 40));
+        minFilterTxt = new JTextField(2);
+        minFilterTxt.setPreferredSize(new Dimension(100, 40));
+        midPointFilterTxt = new JTextField(2);
+        midPointFilterTxt.setPreferredSize(new Dimension(100, 40));
+
+
         
 
 
@@ -235,6 +294,7 @@ public class MyFrame extends JFrame{
         panel3.add(bitBox5);
         panel3.add(bitBox6);
         panel3.add(bitBox7);
+        panel3.add(bitButton);
         panel4.add(labeltextMaskSize1);
         panel4.add(HistrogramTxt);
         panel4.add(histogramButton);
@@ -250,6 +310,14 @@ public class MyFrame extends JFrame{
         medianPanel.add(medianButton);
         smoothingPanel.add(smoothFilterTxt);
         smoothingPanel.add(smoothButton);
+        GeometricMeanPanel.add(geoFilterTxt);
+        GeometricMeanPanel.add(geoButton);
+        MaxPanel.add(maxFilterTxt);
+        MaxPanel.add(maxButton);
+        MinPanel.add(minFilterTxt);
+        MinPanel.add(minButton);
+        MidpointPanel.add(midPointFilterTxt);
+        MidpointPanel.add(midpointButton);
 
         // panel5.add(tabsFilter);
         
@@ -275,6 +343,7 @@ public class MyFrame extends JFrame{
 
     public class Action extends Component implements ActionListener{   
         int imageHeight = 220;
+        HashSet<Integer> b = new HashSet<Integer>();
         @Override
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == loadBt){
@@ -416,6 +485,61 @@ public class MyFrame extends JFrame{
                 label1.setIcon(new ImageIcon(bi));
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
             
+            }
+            else if (e.getSource() == bitButton){
+               if(bitBox0.isSelected()){
+                b.add(0);
+               }
+               if(bitBox1.isSelected()){
+                b.add(1);
+               }
+               if(bitBox2.isSelected()){
+                b.add(2);
+               }
+               if(bitBox3.isSelected()){
+                b.add(3);
+               }
+               if(bitBox4.isSelected()){
+                b.add(4);
+               }
+               if(bitBox5.isSelected()){
+                b.add(5);
+               }
+               if(bitBox6.isSelected()){
+                b.add(6);
+               } 
+               if(bitBox7.isSelected()){
+                b.add(7);
+               }
+               System.out.println(b);
+               imageStorage.bitLevelResolution(b);
+               BufferedImage bi = imageStorage.getImagefromProcessedArray();
+               label1.setIcon(new ImageIcon(bi));
+               label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() == geoButton){
+                imageStorage.Filter(new GeoMean(),Integer.valueOf(geoFilterTxt.getText()));
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() == maxButton){
+                imageStorage.Filter(new Max(), Integer.valueOf(maxFilterTxt.getText()));
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() == minButton){
+                imageStorage.Filter(new Min(), Integer.valueOf(minFilterTxt.getText()));
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() == midpointButton){
+                imageStorage.Filter(new Midpoint(), Integer.valueOf(midPointFilterTxt.getText()));
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
             }
         }
     }
