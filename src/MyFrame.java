@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
+import Algo.Alphatrimmed;
 import Algo.Box;
 import Algo.GeoMean;
 import Algo.Laplacin;
@@ -44,6 +45,15 @@ public class MyFrame extends JFrame{
     JLabel label1;
     JLabel picLabel;
     JLabel labeltxtHighBoosting;
+    JLabel labeltxtAlphatrimmed;
+    JLabel labeltxtAlphatrimmedValue;
+
+
+
+    JButton AlphatrimmedButton;
+    JButton ContraharmonicButton;
+    JButton HarmonicButton;
+    JButton ArithmeticButton;
     JButton grayScaleButton;
     JButton histogramButton;
     JButton histogramButton2;
@@ -73,6 +83,13 @@ public class MyFrame extends JFrame{
     JTextField maxFilterTxt;
     JTextField minFilterTxt;
     JTextField midPointFilterTxt;
+    JTextField ArithmeticTxt;
+    JTextField HarmonicTxt;
+    JTextField ContraharmonicTxt;
+    JTextField AlphatrimmedTxt;
+    JTextField AlphatrimmedMaskTxt;
+
+
 
 
 
@@ -127,8 +144,8 @@ public class MyFrame extends JFrame{
         tabsFilter2.add("Midpoint",MidpointPanel);
         tabsFilter2.add("Alpha-trimmed Mean",AlphatrimmedMeanPanel);
 
-        
-
+        JLabel labeltxtAlphatrimmedValue = new JLabel("Alphatrimmed Value:");
+        JLabel labeltxtAlphatrimmed = new JLabel("Mask size:");
         JLabel labeltxtInput = new JLabel("Input: ");
         JLabel labeltxtOriginal = new JLabel("Original Image");
         JLabel labeltxtProcessed = new JLabel("Processed Image");
@@ -167,6 +184,11 @@ public class MyFrame extends JFrame{
         groupSampling = new ButtonGroup();
 
 
+        AlphatrimmedButton = new JButton("Alphatrimmed Filter");
+        AlphatrimmedButton.addActionListener(act);
+        ContraharmonicButton = new JButton("Contraharmonic Filter");
+        ArithmeticButton = new JButton("Arithmetic Filter");
+        HarmonicButton = new JButton("Harmonic Filter");
         maxButton = new JButton("Max Filter");
         maxButton.addActionListener(act);
         minButton = new JButton("Min Filter");
@@ -223,6 +245,21 @@ public class MyFrame extends JFrame{
         minFilterTxt.setPreferredSize(new Dimension(100, 40));
         midPointFilterTxt = new JTextField(2);
         midPointFilterTxt.setPreferredSize(new Dimension(100, 40));
+        ArithmeticTxt = new JTextField(2);
+        ArithmeticTxt.setPreferredSize(new Dimension(100, 40));
+        HarmonicTxt = new JTextField(2);
+        HarmonicTxt.setPreferredSize(new Dimension(100, 40));
+        ContraharmonicTxt = new JTextField(2);
+        ContraharmonicTxt.setPreferredSize(new Dimension(100, 40));
+        AlphatrimmedTxt = new JTextField(2);
+        AlphatrimmedTxt.setPreferredSize(new Dimension(100, 40));
+        AlphatrimmedMaskTxt = new JTextField(2);
+        AlphatrimmedMaskTxt.setPreferredSize(new Dimension(100, 40));
+
+        
+
+
+
 
 
         
@@ -318,6 +355,22 @@ public class MyFrame extends JFrame{
         MinPanel.add(minButton);
         MidpointPanel.add(midPointFilterTxt);
         MidpointPanel.add(midpointButton);
+        ArithmeticMeanPanel.add(ArithmeticTxt);
+        ArithmeticMeanPanel.add(ArithmeticButton);
+        HarmonicMeanPanel.add(HarmonicTxt);
+        HarmonicMeanPanel.add(HarmonicButton);
+        ContraharmonicMeanPanel.add(ContraharmonicTxt);
+        ContraharmonicMeanPanel.add(ContraharmonicButton);
+        AlphatrimmedMeanPanel.add(labeltxtAlphatrimmed);
+        AlphatrimmedMeanPanel.add(AlphatrimmedMaskTxt);
+        AlphatrimmedMeanPanel.add(labeltxtAlphatrimmedValue);
+        AlphatrimmedMeanPanel.add(AlphatrimmedTxt);
+        AlphatrimmedMeanPanel.add(AlphatrimmedButton);
+
+        
+        
+
+
 
         // panel5.add(tabsFilter);
         
@@ -537,6 +590,13 @@ public class MyFrame extends JFrame{
             }
             else if(e.getSource() == midpointButton){
                 imageStorage.Filter(new Midpoint(), Integer.valueOf(midPointFilterTxt.getText()));
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() == AlphatrimmedButton){
+                System.out.println(Integer.valueOf(AlphatrimmedTxt.getText()));
+                imageStorage.Filter(new Alphatrimmed(Integer.valueOf(AlphatrimmedTxt.getText())), Integer.valueOf(AlphatrimmedMaskTxt.getText()));
                 BufferedImage bi = imageStorage.getImagefromProcessedArray();
                 label1.setIcon(new ImageIcon(bi));
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
