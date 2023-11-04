@@ -16,7 +16,9 @@ import javax.swing.event.MenuListener;
 
 import Algo.Alphatrimmed;
 import Algo.Box;
+import Algo.Contraharmonic;
 import Algo.GeoMean;
+import Algo.Harmonic;
 import Algo.Laplacin;
 import Algo.Max;
 import Algo.Median;
@@ -47,6 +49,8 @@ public class MyFrame extends JFrame{
     JLabel labeltxtHighBoosting;
     JLabel labeltxtAlphatrimmed;
     JLabel labeltxtAlphatrimmedValue;
+    JLabel labeltxtContraharmonicMaskSize;
+    JLabel labeltxtContraharmonicQValue;
 
 
 
@@ -86,6 +90,7 @@ public class MyFrame extends JFrame{
     JTextField ArithmeticTxt;
     JTextField HarmonicTxt;
     JTextField ContraharmonicTxt;
+    JTextField ContraharmonicQValueTxt;
     JTextField AlphatrimmedTxt;
     JTextField AlphatrimmedMaskTxt;
 
@@ -144,6 +149,8 @@ public class MyFrame extends JFrame{
         tabsFilter2.add("Midpoint",MidpointPanel);
         tabsFilter2.add("Alpha-trimmed Mean",AlphatrimmedMeanPanel);
 
+        JLabel labeltxtContraharmonicQValue = new JLabel("Q value");
+        JLabel labeltxtContraharmonicMaskSize = new JLabel("Mask size:");
         JLabel labeltxtAlphatrimmedValue = new JLabel("Alphatrimmed Value:");
         JLabel labeltxtAlphatrimmed = new JLabel("Mask size:");
         JLabel labeltxtInput = new JLabel("Input: ");
@@ -187,8 +194,10 @@ public class MyFrame extends JFrame{
         AlphatrimmedButton = new JButton("Alphatrimmed Filter");
         AlphatrimmedButton.addActionListener(act);
         ContraharmonicButton = new JButton("Contraharmonic Filter");
+        ContraharmonicButton.addActionListener(act);
         ArithmeticButton = new JButton("Arithmetic Filter");
         HarmonicButton = new JButton("Harmonic Filter");
+        HarmonicButton.addActionListener(act);
         maxButton = new JButton("Max Filter");
         maxButton.addActionListener(act);
         minButton = new JButton("Min Filter");
@@ -251,6 +260,8 @@ public class MyFrame extends JFrame{
         HarmonicTxt.setPreferredSize(new Dimension(100, 40));
         ContraharmonicTxt = new JTextField(2);
         ContraharmonicTxt.setPreferredSize(new Dimension(100, 40));
+        ContraharmonicQValueTxt = new JTextField(2);
+        ContraharmonicQValueTxt.setPreferredSize(new Dimension(100, 40));
         AlphatrimmedTxt = new JTextField(2);
         AlphatrimmedTxt.setPreferredSize(new Dimension(100, 40));
         AlphatrimmedMaskTxt = new JTextField(2);
@@ -359,13 +370,20 @@ public class MyFrame extends JFrame{
         ArithmeticMeanPanel.add(ArithmeticButton);
         HarmonicMeanPanel.add(HarmonicTxt);
         HarmonicMeanPanel.add(HarmonicButton);
-        ContraharmonicMeanPanel.add(ContraharmonicTxt);
-        ContraharmonicMeanPanel.add(ContraharmonicButton);
+        
+        
         AlphatrimmedMeanPanel.add(labeltxtAlphatrimmed);
         AlphatrimmedMeanPanel.add(AlphatrimmedMaskTxt);
         AlphatrimmedMeanPanel.add(labeltxtAlphatrimmedValue);
         AlphatrimmedMeanPanel.add(AlphatrimmedTxt);
         AlphatrimmedMeanPanel.add(AlphatrimmedButton);
+        ContraharmonicMeanPanel.add(labeltxtContraharmonicMaskSize);
+        ContraharmonicMeanPanel.add(ContraharmonicTxt);
+        ContraharmonicMeanPanel.add(labeltxtContraharmonicQValue);
+        ContraharmonicMeanPanel.add(ContraharmonicQValueTxt);
+        ContraharmonicMeanPanel.add(ContraharmonicButton);
+
+
 
         
         
@@ -597,6 +615,20 @@ public class MyFrame extends JFrame{
             else if(e.getSource() == AlphatrimmedButton){
                 System.out.println(Integer.valueOf(AlphatrimmedTxt.getText()));
                 imageStorage.Filter(new Alphatrimmed(Integer.valueOf(AlphatrimmedTxt.getText())), Integer.valueOf(AlphatrimmedMaskTxt.getText()));
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() == HarmonicButton){
+                imageStorage.Filter(new Harmonic(), Integer.valueOf(HarmonicTxt.getText()));
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() ==  ContraharmonicButton){
+                System.out.println(Integer.valueOf(ContraharmonicQValueTxt.getText()));
+                System.out.println(Integer.valueOf(ContraharmonicTxt.getText()));
+                imageStorage.Filter(new Contraharmonic(Integer.valueOf(ContraharmonicQValueTxt.getText())), Integer.valueOf(ContraharmonicTxt.getText()));
                 BufferedImage bi = imageStorage.getImagefromProcessedArray();
                 label1.setIcon(new ImageIcon(bi));
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
