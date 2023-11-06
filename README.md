@@ -23,7 +23,7 @@ Functions/Features:
 
 
 ```
-<img width="1033" alt="Screen Shot 2023-10-23 at 01 15 40" src="https://github.com/fionaguCode/Image-Processing/assets/42789126/d47008bf-ec48-46da-9ed2-f8f866a2efea">
+![Screen Shot 2023-11-06 at 00 08 14](https://github.com/fionaguCode/Image-Processing/assets/42789126/f23af0bc-b68a-4f25-9a7d-8bc3f8750054)
 
 <img width="1042" alt="Screen Shot 2023-10-23 at 01 15 00" src="https://github.com/fionaguCode/Image-Processing/assets/42789126/239e7452-f76e-4e01-a786-8416fd415866">
 
