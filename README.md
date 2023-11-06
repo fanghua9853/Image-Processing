@@ -10,7 +10,15 @@ Functions/Features:
  * Spatial Resolution(upsampling & subsampling)
  * Smoothing Box Filters
  * Median Filters
- * bitplane changing(MSB/LSB) 
+ * bitplane changing(MSB/LSB)
+ * Alpha trimmed Filters
+ * Arithmetic Filters
+ * Geomrtic Filters
+ * Max Filters
+ * Min Filters
+ * Midpoint Filters
+ * Harmonic Filters
+ * Contraharmonic Filters
  * Output/Display Processed image
 
 
