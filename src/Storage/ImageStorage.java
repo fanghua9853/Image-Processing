@@ -140,7 +140,17 @@ public class ImageStorage {
         processedArray = new int[imgArray.length][imgArray[0].length];
         m.slideWindow(imgArray, processedArray);
     }
-
+    public void HybridFilter(filterInterface s){
+        HybridFilter m = new HybridFilter(s);
+        processedArray = new int[imgArray.length][imgArray[0].length];
+        m.slideWindow(imgArray, processedArray);
+        MSE();
+    }
+    public void ModifiedFilter(filterInterface s,int n){
+        ModifiedFilter m = new ModifiedFilter(s,n);
+        processedArray = new int[imgArray.length][imgArray[0].length];
+        m.slideWindow(imgArray, processedArray);
+    }
     public void HEQ(){
         HistogramEQ heq = new HistogramEQ();
          processedArray = new int[imgArray.length][imgArray[0].length];
@@ -180,5 +190,14 @@ public class ImageStorage {
             }
         }
     } 
-
+    public void MSE(){
+        double mse=0;
+        for(int i=0;i<imgArray.length;i++){
+            for(int j=0; j<imgArray[0].length;j++){
+                mse+=Math.pow(imgArray[i][j]-processedArray[i][j],2);
+            }
+        }
+        mse= mse/((imgArray.length * imgArray[0].length));
+        System.out.println(mse);
+    }
 }

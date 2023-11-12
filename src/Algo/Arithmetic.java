@@ -17,4 +17,5 @@ public class Arithmetic implements filterInterface {
         
         
         return (int)(mean);
+    }
 }

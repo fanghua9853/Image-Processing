@@ -15,6 +15,7 @@ import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
 import Algo.Alphatrimmed;
+import Algo.Arithmetic;
 import Algo.Box;
 import Algo.Contraharmonic;
 import Algo.GeoMean;
@@ -24,6 +25,7 @@ import Algo.Max;
 import Algo.Median;
 import Algo.Midpoint;
 import Algo.Min;
+import Algo.Sobel;
 import Storage.ImageStorage;
 
 public class MyFrame extends JFrame{
@@ -51,9 +53,15 @@ public class MyFrame extends JFrame{
     JLabel labeltxtAlphatrimmedValue;
     JLabel labeltxtContraharmonicMaskSize;
     JLabel labeltxtContraharmonicQValue;
+    JLabel labeltxtModifiedMaskSize;
+    JLabel labeltxtModifiedEquation;
+    JLabel labeltxtHybridEquation;
 
 
 
+    JButton ModifiedButton;
+    JButton HybridButton;
+    JButton SobelButton;
     JButton AlphatrimmedButton;
     JButton ContraharmonicButton;
     JButton HarmonicButton;
@@ -93,6 +101,7 @@ public class MyFrame extends JFrame{
     JTextField ContraharmonicQValueTxt;
     JTextField AlphatrimmedTxt;
     JTextField AlphatrimmedMaskTxt;
+    JTextField ModifiedFilterMaskTxt;
 
 
 
@@ -132,8 +141,12 @@ public class MyFrame extends JFrame{
         JPanel MinPanel = new JPanel();
         JPanel MidpointPanel = new JPanel();
         JPanel AlphatrimmedMeanPanel = new JPanel();
+        JPanel SobelPane = new JPanel();
+        JPanel HybridFilterPane = new JPanel();
+        JPanel ModifiedFilterPane = new JPanel();
 
 
+        JTabbedPane tabsHybridFilter = new JTabbedPane();
         JTabbedPane tabsFilter = new JTabbedPane();
         JTabbedPane tabsFilter2 = new JTabbedPane();
         tabsFilter.add("Smoothing Fliter",smoothingPanel);
@@ -148,7 +161,13 @@ public class MyFrame extends JFrame{
         tabsFilter2.add("Min",MinPanel);
         tabsFilter2.add("Midpoint",MidpointPanel);
         tabsFilter2.add("Alpha-trimmed Mean",AlphatrimmedMeanPanel);
+        tabsFilter2.add("Sobel",SobelPane);
+        tabsHybridFilter.add("Hybrid Filter",HybridFilterPane);
+        tabsHybridFilter.add("Modified Filter",ModifiedFilterPane);
 
+        JLabel labeltxtHybridEquation = new JLabel("Arithmetic Mean + Sobel");
+        JLabel labeltxtModifiedEquation = new JLabel("Arithmetic Mean + Sharpening(Laplacin):  ");
+        JLabel labeltxtModifiedMaskSize = new JLabel("Mask Size");
         JLabel labeltxtContraharmonicQValue = new JLabel("Q value");
         JLabel labeltxtContraharmonicMaskSize = new JLabel("Mask size:");
         JLabel labeltxtAlphatrimmedValue = new JLabel("Alphatrimmed Value:");
@@ -175,6 +194,7 @@ public class MyFrame extends JFrame{
         tabs.add("Histogram Equalization",panel4);
         tabs.add("Spatial Filters",tabsFilter);
         tabs.add("Image Restoration Filters",tabsFilter2);
+        tabs.add("Presentation Filter",tabsHybridFilter);
 
         bitBox0 = new JCheckBox("0 bit");
         bitBox1 = new JCheckBox("1 bit");
@@ -191,11 +211,19 @@ public class MyFrame extends JFrame{
         groupSampling = new ButtonGroup();
 
 
+
+        ModifiedButton = new JButton("Modified Filter");
+        ModifiedButton.addActionListener(act);
+        HybridButton = new JButton("Hybrid Filter");
+        HybridButton.addActionListener(act);
+        SobelButton = new JButton("Sobel Filter");
+        SobelButton.addActionListener(act);
         AlphatrimmedButton = new JButton("Alphatrimmed Filter");
         AlphatrimmedButton.addActionListener(act);
         ContraharmonicButton = new JButton("Contraharmonic Filter");
         ContraharmonicButton.addActionListener(act);
         ArithmeticButton = new JButton("Arithmetic Filter");
+        ArithmeticButton.addActionListener(act);
         HarmonicButton = new JButton("Harmonic Filter");
         HarmonicButton.addActionListener(act);
         maxButton = new JButton("Max Filter");
@@ -266,6 +294,9 @@ public class MyFrame extends JFrame{
         AlphatrimmedTxt.setPreferredSize(new Dimension(100, 40));
         AlphatrimmedMaskTxt = new JTextField(2);
         AlphatrimmedMaskTxt.setPreferredSize(new Dimension(100, 40));
+        ModifiedFilterMaskTxt = new JTextField(2);
+        ModifiedFilterMaskTxt.setPreferredSize(new Dimension(100, 40));
+
 
         
 
@@ -371,7 +402,13 @@ public class MyFrame extends JFrame{
         HarmonicMeanPanel.add(HarmonicTxt);
         HarmonicMeanPanel.add(HarmonicButton);
         
-        
+        ModifiedFilterPane.add(labeltxtModifiedEquation);
+        ModifiedFilterPane.add(labeltxtModifiedMaskSize);
+        ModifiedFilterPane.add(ModifiedFilterMaskTxt);
+        ModifiedFilterPane.add(ModifiedButton);
+        HybridFilterPane.add(labeltxtHybridEquation);
+        HybridFilterPane.add(HybridButton);
+        SobelPane.add(SobelButton);
         AlphatrimmedMeanPanel.add(labeltxtAlphatrimmed);
         AlphatrimmedMeanPanel.add(AlphatrimmedMaskTxt);
         AlphatrimmedMeanPanel.add(labeltxtAlphatrimmedValue);
@@ -382,6 +419,7 @@ public class MyFrame extends JFrame{
         ContraharmonicMeanPanel.add(labeltxtContraharmonicQValue);
         ContraharmonicMeanPanel.add(ContraharmonicQValueTxt);
         ContraharmonicMeanPanel.add(ContraharmonicButton);
+
 
 
 
@@ -633,6 +671,33 @@ public class MyFrame extends JFrame{
                 label1.setIcon(new ImageIcon(bi));
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
             }
+            else if(e.getSource() == ArithmeticButton){
+                System.out.println(Integer.valueOf(ArithmeticTxt.getText()));
+                imageStorage.Filter(new Arithmetic(), Integer.valueOf(ArithmeticTxt.getText()));
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() == SobelButton){
+                imageStorage.Filter(new Sobel(),3);
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() == HybridButton){
+                imageStorage.HybridFilter(new Arithmetic());
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+
+            }
+            else if(e.getSource() == ModifiedButton){
+                imageStorage.ModifiedFilter(new Arithmetic(),Integer.valueOf(ModifiedFilterMaskTxt.getText()));
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            
         }
     }
 
