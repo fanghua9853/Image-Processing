@@ -1,6 +1,5 @@
 # About me!
-
-This image processing tool provides GUI for users to alternate the image through filters and resolution methods
+This image processing tool provides GUI for users to alternate the image(edge detection, noise removal, image smoothing)through filters and methods 
 implemented in Java.
 
 Functions/Features:
