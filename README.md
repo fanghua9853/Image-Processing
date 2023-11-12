@@ -8,17 +8,24 @@ Functions/Features:
  * Load/Read image from local laptop
  * Grayscale Resolution
  * Spatial Resolution(upsampling & subsampling)
- * Smoothing Box Filters
- * Median Filters
+ * Spatial Filters (smooth, unsharpened, sharpen edge features)
+   * Smoothing Box Filters
+   * Median Filters
+   * HignBoosting Filters
+   * Sharpening Filters
  * bitplane changing(MSB/LSB)
- * Alpha trimmed Filters
- * Arithmetic Filters
- * Geomrtic Filters
- * Max Filters
- * Min Filters
- * Midpoint Filters
- * Harmonic Filters
- * Contraharmonic Filters
+ * Image Resolution(Nosie Remove)
+   * Alpha trimmed Filters
+   * Arithmetic Filters
+   * Geomrtic Filters
+   * Max Filters
+   * Min Filters
+   * Midpoint Filters
+   * Harmonic Filters
+   * Contraharmonic Filters
+ * Combination Filter for degraded image and edge detection
+   * Hybrid Filter (Arithmetic Mean + Sobel)
+   * Modified Filter (Arithmetic Mean + Sharpening(Laplacin))
  * Output/Display Processed image
 
 
