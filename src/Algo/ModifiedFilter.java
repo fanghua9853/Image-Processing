@@ -30,8 +30,8 @@ public class ModifiedFilter {
                     }
                 }
                 //run filter and save to processed on processed[i][j]
-                //processedArray[i2][j2] =(int)(Math.pow(mean.Calculate(newWindow), 0.8)+0.8*sobel.Calculate(newWindow));
-                processedArray[i2][j2] = mean.Calculate(newWindow) + sharpening.Calculate(newWindow);
+                processedArray[i2][j2] =(int)(Math.pow(mean.Calculate(newWindow), 0.8)+0.8*sharpening.Calculate(newWindow));
+                //processedArray[i2][j2] = mean.Calculate(newWindow) + sharpening.Calculate(newWindow);
                 
 
 

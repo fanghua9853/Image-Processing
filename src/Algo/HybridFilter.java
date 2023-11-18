@@ -29,7 +29,7 @@ public class HybridFilter {
                     }
                 }
                 //run filter and save to processed on processed[i][j]
-                processedArray[i2][j2] =(int)(Math.pow(mean.Calculate(newWindow), 1)+1*sobel.Calculate(newWindow));
+                processedArray[i2][j2] =(int)(Math.pow(mean.Calculate(newWindow), 2)+2*sobel.Calculate(newWindow));
                 if(processedArray[i2][j2]>255){
                     processedArray[i2][j2]=255;
                 }
