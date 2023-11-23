@@ -5,11 +5,6 @@ import Storage.ImageStorage;
 
 public class RLCgrayscale {
     
-    public int Calculate(int [][]imgArray){
-        
-        
-        
-    }
 
     public LinkedList<Integer> EncodePixel(int [][]imgArray){
         LinkedList<Integer> encode = new LinkedList<>();

@@ -3,6 +3,7 @@ import java.awt.image.*;
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
@@ -200,4 +201,39 @@ public class ImageStorage {
         mse= mse/((imgArray.length * imgArray[0].length));
         System.out.println(mse);
     }
+
+    public void RLCgrayscale(int[][] imgArray){
+        RLCgrayscale grayscale = new RLCgrayscale();
+        LinkedList<Integer> encode = new LinkedList<>();
+        LinkedList<Integer> decode = new LinkedList<>();
+        long encodeStart = System.currentTimeMillis();
+        encode = grayscale.EncodePixel(imgArray);
+        long encodeEnd = System.currentTimeMillis();
+        long encodeTime = encodeEnd - encodeStart;
+       
+        long decodeStart = System.currentTimeMillis();
+        decode = grayscale.DecodePixel(encode);
+        long decodeEnd = System.currentTimeMillis();
+        long decodeTime = decodeEnd - decodeStart;
+       
+        
+        //Calculate the compression ratio
+        double originalLenth = encode.size();
+        double newLength = decode.size();
+        double compressionRatio = originalLenth/newLength;
+
+        //
+        System.out.println("Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
+
+    }
+
+    public void HuffmanCompression(){
+        Huffman h = new Huffman();
+        h.Calculate(imgArray);
+        String[] encode=h.PixelToCode(imgArray);
+        int[] decode = h.HuffmanDecoding(encode);
+        
+    }
+
+    
 }

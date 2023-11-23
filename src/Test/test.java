@@ -20,6 +20,7 @@ public class test {
         // testSet.add(0);
         // var.bitLevelResolution(testSet);
         //var.medianFilter(7);
+        var.HuffmanCompression();
         var.saveProcessedImage("src/test.png");
         
     }
