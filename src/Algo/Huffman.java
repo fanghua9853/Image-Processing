@@ -8,7 +8,7 @@ public class Huffman {
     
     HashMap<Integer,String> HuffmandCode = new HashMap<>();
     HuffmanNode root = null;
-    
+    double huffmanLength;
     public int Calculate(int [][]imgArray){
 
         int[] level = pixelCount(imgArray);
@@ -74,6 +74,10 @@ public class Huffman {
         this.printCode(root, "");
         return 0;
     }
+    public double length(){
+        return huffmanLength;
+
+    }
     public int[] pixelCount(int imgArray[][]){
         int[] level = new int[256];
         for(int i=0;i<imgArray.length;i++){
@@ -110,6 +114,7 @@ public class Huffman {
             // c is the character in the node 
             System.out.println(root.pixel + ":" + s); 
             HuffmandCode.put(root.pixel,"s");
+            huffmanLength+=root.prob*s.length();
             return; 
         } 
   
@@ -159,6 +164,8 @@ public class Huffman {
         
         return HuffmanDecodeArray;
     }
+
+    
 
 
 }

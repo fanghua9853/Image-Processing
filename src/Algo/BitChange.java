@@ -7,8 +7,9 @@ public class BitChange {
     public void changeBitLevel(int [][] imgArray, Set<Integer> Bit,int [][] processedArray) {
         for(int  i=0; i<imgArray.length; i++){
             for(int j=0; j<imgArray[0].length; j++){
+                //change the grayscale val to bit num
                 binary = String.format("%8s",Integer.toBinaryString(imgArray[i][j])).replace(' ','0');
-                // System.out.print(binary);
+                
 
                  StringBuilder str = new StringBuilder(binary);
                  str=str.reverse();

@@ -23,6 +23,8 @@ public class RLCgrayscale {
                 
             }
         }
+        encode.add(lastPixel);
+        encode.add(count);
         return encode;
 
         

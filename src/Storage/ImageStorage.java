@@ -1,6 +1,7 @@
 package Storage;
 import java.awt.image.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -218,20 +219,72 @@ public class ImageStorage {
        
         
         //Calculate the compression ratio
-        double originalLenth = encode.size();
-        double newLength = decode.size();
+        double newLength = encode.size();
+        double originalLenth = decode.size();
         double compressionRatio = originalLenth/newLength;
 
         //
-        System.out.println("Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
+        System.out.println("RLCgrayscale Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
+
+    }
+
+    public void RLCbitchange(){
+        RLCbitchange bc = new RLCbitchange();
+        ArrayList<Integer>[] encode;
+        int[] decode;
+        long encodeStart = System.currentTimeMillis();
+        encode = bc.EncodePixel(imgArray);
+        long encodeEnd = System.currentTimeMillis();
+        long encodeTime = encodeEnd - encodeStart;
+       
+        long decodeStart = System.currentTimeMillis();
+        decode = bc.decodePixel(encode);
+        long decodeEnd = System.currentTimeMillis();
+        long decodeTime = decodeEnd - decodeStart;
+       
+        
+        //Calculate the compression ratio
+
+        double newLength = 0;
+        for(int i=0;i<8;i++){
+            newLength += encode[i].size();
+        }
+        
+        double originalLenth = decode.length;
+        double compressionRatio = originalLenth/newLength;
+
+        //
+        System.out.println(" RLCbitchange Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
 
     }
 
     public void HuffmanCompression(){
         Huffman h = new Huffman();
+        String[] encode;
+        int[] decode;
+        
+        long encodeStart = System.currentTimeMillis();
         h.Calculate(imgArray);
-        String[] encode=h.PixelToCode(imgArray);
-        int[] decode = h.HuffmanDecoding(encode);
+        encode=h.PixelToCode(imgArray);
+        long encodeEnd = System.currentTimeMillis();
+        long encodeTime = encodeEnd - encodeStart;
+       
+        long decodeStart = System.currentTimeMillis();
+        decode = h.HuffmanDecoding(encode);
+        long decodeEnd = System.currentTimeMillis();
+        long decodeTime = decodeEnd - decodeStart;
+
+        //Calculate the compression ratio
+        double newLength = h.length();
+        double originalLenth =8*decode.length;
+        double compressionRatio = originalLenth/newLength;
+        
+
+        //
+        System.out.println("HuffmanCompression Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
+
+       
+
         
     }
 

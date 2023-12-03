@@ -596,6 +596,7 @@ public class MyFrame extends JFrame{
             
             }
             else if (e.getSource() == bitButton){
+                b.clear();
                if(bitBox0.isSelected()){
                 b.add(0);
                }
