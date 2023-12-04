@@ -74,7 +74,7 @@ public class Huffman {
         this.printCode(root, "");
         return 0;
     }
-    public double length(){
+    public double getlength(){
         return huffmanLength;
 
     }
@@ -129,7 +129,7 @@ public class Huffman {
 
 
     public String[] PixelToCode(int[][] imgArray){
-        String[] newArray = new String[imgArray.length];
+        String[] newArray = new String[imgArray.length*imgArray[0].length];
         for(int i=0;i<imgArray.length;i++){
             for(int j=0; j<imgArray[0].length;j++){
                 newArray[i*imgArray.length+j] = HuffmandCode.get(imgArray[i][j]);

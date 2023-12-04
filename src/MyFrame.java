@@ -56,9 +56,19 @@ public class MyFrame extends JFrame{
     JLabel labeltxtModifiedMaskSize;
     JLabel labeltxtModifiedEquation;
     JLabel labeltxtHybridEquation;
+    JLabel labeltxtHuffman;
+    JLabel labeltxtRLCgrayscale;
+    JLabel labeltxtRLCbitchange;
+   
+    
 
 
 
+
+
+    JButton HuffmanCompressionButton;
+    JButton RLCbitchangeButton;
+    JButton RLCgrayscaleButton;
     JButton ModifiedButton;
     JButton HybridButton;
     JButton SobelButton;
@@ -144,8 +154,11 @@ public class MyFrame extends JFrame{
         JPanel SobelPane = new JPanel();
         JPanel HybridFilterPane = new JPanel();
         JPanel ModifiedFilterPane = new JPanel();
+        JPanel RLCgrayscalePane = new JPanel();
+        JPanel RLCbitchangePane = new JPanel();
+        JPanel HuffmanCompressionPane = new JPanel();
 
-
+        JTabbedPane tabsCompression = new JTabbedPane();
         JTabbedPane tabsHybridFilter = new JTabbedPane();
         JTabbedPane tabsFilter = new JTabbedPane();
         JTabbedPane tabsFilter2 = new JTabbedPane();
@@ -164,7 +177,16 @@ public class MyFrame extends JFrame{
         tabsFilter2.add("Sobel",SobelPane);
         tabsHybridFilter.add("Hybrid Filter",HybridFilterPane);
         tabsHybridFilter.add("Modified Filter",ModifiedFilterPane);
+        tabsCompression.add("Huffman Compression",HuffmanCompressionPane);
+        tabsCompression.add("Run Length Code Grayscale",RLCgrayscalePane);
+        tabsCompression.add("Run Length Code Bit Plane",RLCbitchangePane);
 
+    //    JLabel labetxtHuffmanRuntime = new JLabel("Huffman Compression Runtime: ");
+    //    JLabel labeltxtRLCgrayscaleRuntime = new JLabel("RLC grayscale Runtime: ");
+    //    JLabel labeltxtRLCbitchangeRuntime = new JLabel("RLC bit plane Runtime: ");
+        labeltxtHuffman = new JLabel("Huffman Compression Ratio: ");
+        labeltxtRLCgrayscale = new JLabel("RLC grayscale Compression Ratio: ");
+        labeltxtRLCbitchange = new JLabel("RLC bit plane Compression Ratio: ");
         JLabel labeltxtHybridEquation = new JLabel("Arithmetic Mean + Sobel");
         JLabel labeltxtModifiedEquation = new JLabel("Arithmetic Mean + Sharpening(Laplacin):  ");
         JLabel labeltxtModifiedMaskSize = new JLabel("Mask Size");
@@ -195,6 +217,7 @@ public class MyFrame extends JFrame{
         tabs.add("Spatial Filters",tabsFilter);
         tabs.add("Image Restoration Filters",tabsFilter2);
         tabs.add("Presentation Filter",tabsHybridFilter);
+        tabs.add("Compression Algo",tabsCompression);
 
         bitBox0 = new JCheckBox("0 bit");
         bitBox1 = new JCheckBox("1 bit");
@@ -211,7 +234,12 @@ public class MyFrame extends JFrame{
         groupSampling = new ButtonGroup();
 
 
-
+        HuffmanCompressionButton = new JButton("Huffman Compression");
+        HuffmanCompressionButton.addActionListener(act);
+        RLCgrayscaleButton = new JButton("RLC graysale Compression");
+        RLCgrayscaleButton.addActionListener(act);
+        RLCbitchangeButton = new JButton("RLC bit plane Compression");
+        RLCbitchangeButton.addActionListener(act);
         ModifiedButton = new JButton("Modified Filter");
         ModifiedButton.addActionListener(act);
         HybridButton = new JButton("Hybrid Filter");
@@ -402,6 +430,15 @@ public class MyFrame extends JFrame{
         HarmonicMeanPanel.add(HarmonicTxt);
         HarmonicMeanPanel.add(HarmonicButton);
         
+        HuffmanCompressionPane.add(labeltxtHuffman);
+        //HuffmanCompressionPane.add(labetxtHuffmanRuntime);
+        HuffmanCompressionPane.add(HuffmanCompressionButton);
+        RLCgrayscalePane.add(labeltxtRLCgrayscale);
+        //RLCgrayscalePane.add(labeltxtRLCgrayscaleRuntime);
+        RLCgrayscalePane.add(RLCgrayscaleButton);
+        RLCbitchangePane.add(labeltxtRLCbitchange);
+        //RLCbitchangePane.add(labeltxtRLCbitchangeRuntime);
+        RLCbitchangePane.add(RLCbitchangeButton);
         ModifiedFilterPane.add(labeltxtModifiedEquation);
         ModifiedFilterPane.add(labeltxtModifiedMaskSize);
         ModifiedFilterPane.add(ModifiedFilterMaskTxt);
@@ -697,6 +734,24 @@ public class MyFrame extends JFrame{
                 BufferedImage bi = imageStorage.getImagefromProcessedArray();
                 label1.setIcon(new ImageIcon(bi));
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() == HuffmanCompressionButton){
+                labeltxtHuffman.setText(imageStorage.HuffmanCompression());
+                // BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                // label1.setIcon(new ImageIcon(bi));
+                // label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() == RLCgrayscaleButton){
+                labeltxtRLCgrayscale.setText(imageStorage.RLCgrayscale());
+                // BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                // label1.setIcon(new ImageIcon(bi));
+                // label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+            }
+            else if(e.getSource() == RLCbitchangeButton){
+                labeltxtRLCbitchange.setText(imageStorage.RLCbitchange());
+                // BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                // label1.setIcon(new ImageIcon(bi));
+                // label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
             }
             
         }

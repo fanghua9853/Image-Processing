@@ -203,7 +203,7 @@ public class ImageStorage {
         System.out.println(mse);
     }
 
-    public void RLCgrayscale(int[][] imgArray){
+    public String RLCgrayscale(){
         RLCgrayscale grayscale = new RLCgrayscale();
         LinkedList<Integer> encode = new LinkedList<>();
         LinkedList<Integer> decode = new LinkedList<>();
@@ -224,11 +224,11 @@ public class ImageStorage {
         double compressionRatio = originalLenth/newLength;
 
         //
-        System.out.println("RLCgrayscale Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
+        return ("RLCgrayscale Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
 
     }
 
-    public void RLCbitchange(){
+    public String RLCbitchange(){
         RLCbitchange bc = new RLCbitchange();
         ArrayList<Integer>[] encode;
         int[] decode;
@@ -254,11 +254,11 @@ public class ImageStorage {
         double compressionRatio = originalLenth/newLength;
 
         //
-        System.out.println(" RLCbitchange Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
+        return (" RLCbitchange Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
 
     }
 
-    public void HuffmanCompression(){
+    public String HuffmanCompression(){
         Huffman h = new Huffman();
         String[] encode;
         int[] decode;
@@ -275,13 +275,13 @@ public class ImageStorage {
         long decodeTime = decodeEnd - decodeStart;
 
         //Calculate the compression ratio
-        double newLength = h.length();
+        double newLength = h.getlength();
         double originalLenth =8*decode.length;
         double compressionRatio = originalLenth/newLength;
         
 
         //
-        System.out.println("HuffmanCompression Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
+        return ("HuffmanCompression Encode time: "+encodeTime+" Decode time: "+decodeTime+" Compression Ratio: "+compressionRatio);
 
        
 

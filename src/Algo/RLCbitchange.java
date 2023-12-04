@@ -55,10 +55,10 @@ public class RLCbitchange {
     public int[] decodePixel(ArrayList<Integer>[] encoList){
         
 
-        LinkedList<Integer>[] BitDecode = new LinkedList[8];
+        ArrayList<Integer>[] BitDecode = new ArrayList[8];
         
         for(int b=0;b<8;b++){
-             BitDecode[b] = new LinkedList<>();
+             BitDecode[b] = new ArrayList<>();
              for(int i=0;i<encoList[b].size();i++){
                 for(int j=0;j<encoList[b].get(i);j++){
                     if(i %2==0){
