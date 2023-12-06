@@ -1,4 +1,5 @@
 package Algo;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import Storage.ImageStorage;
@@ -6,8 +7,8 @@ import Storage.ImageStorage;
 public class RLCgrayscale {
     
 
-    public LinkedList<Integer> EncodePixel(int [][]imgArray){
-        LinkedList<Integer> encode = new LinkedList<>();
+    public ArrayList<Integer> EncodePixel(int [][]imgArray){
+        ArrayList<Integer> encode = new ArrayList<>();
         int count=0;
         int lastPixel=imgArray[0][0];
         for(int i=0; i<imgArray.length;i++){
@@ -32,14 +33,12 @@ public class RLCgrayscale {
 
 
 
-    public LinkedList<Integer> DecodePixel(LinkedList<Integer> encode){
-        LinkedList<Integer> decode = new LinkedList<>();
-        for(int i=0; i<encode.size(); i++){
+    public ArrayList<Integer> DecodePixel(ArrayList<Integer> encode){
+        ArrayList<Integer> decode = new ArrayList<>();
+        for(int i=1; i<encode.size(); i+=2){
             
-            int pixel = encode.getFirst();
-            encode.removeFirst();
-            int count = encode.getFirst();
-            encode.removeFirst();
+            int pixel = encode.get(i-1);
+            int count = encode.get(i);
 
             for(int j=0; j<count;j++){
                 decode.add(pixel);

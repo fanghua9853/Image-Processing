@@ -205,8 +205,10 @@ public class ImageStorage {
 
     public String RLCgrayscale(){
         RLCgrayscale grayscale = new RLCgrayscale();
-        LinkedList<Integer> encode = new LinkedList<>();
-        LinkedList<Integer> decode = new LinkedList<>();
+        ArrayList<Integer> encode = new ArrayList<>();
+        ArrayList<Integer> decode = new ArrayList<>();
+        processedArray = new int[imgArray.length][imgArray[0].length];
+
         long encodeStart = System.currentTimeMillis();
         encode = grayscale.EncodePixel(imgArray);
         long encodeEnd = System.currentTimeMillis();
@@ -216,14 +218,20 @@ public class ImageStorage {
         decode = grayscale.DecodePixel(encode);
         long decodeEnd = System.currentTimeMillis();
         long decodeTime = decodeEnd - decodeStart;
-       
-        
-        //Calculate the compression ratio
+       //Calculate the compression ratio
         double newLength = encode.size();
         double originalLenth = decode.size();
         double compressionRatio = originalLenth/newLength;
 
+        for(int i=0;i<processedArray.length;i++){
+            for(int j=0; j<processedArray[0].length;j++){
+                processedArray[i][j]=decode.get(i*processedArray.length+j);
+
+            }
+        }
+
         //
+        System.out.println("decode size:"+decode.size());
         return ("RLCgrayscale Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
 
     }
@@ -232,6 +240,8 @@ public class ImageStorage {
         RLCbitchange bc = new RLCbitchange();
         ArrayList<Integer>[] encode;
         int[] decode;
+        processedArray = new int[imgArray.length][imgArray[0].length];
+
         long encodeStart = System.currentTimeMillis();
         encode = bc.EncodePixel(imgArray);
         long encodeEnd = System.currentTimeMillis();
@@ -242,7 +252,11 @@ public class ImageStorage {
         long decodeEnd = System.currentTimeMillis();
         long decodeTime = decodeEnd - decodeStart;
        
-        
+        for(int i=0;i<processedArray.length;i++){
+            for(int j=0; j<processedArray[0].length;j++){
+                processedArray[i][j]=decode[i*processedArray.length+j];
+            }
+        }
         //Calculate the compression ratio
 
         double newLength = 0;
@@ -262,6 +276,8 @@ public class ImageStorage {
         Huffman h = new Huffman();
         String[] encode;
         int[] decode;
+        processedArray = new int[imgArray.length][imgArray[0].length];
+
         
         long encodeStart = System.currentTimeMillis();
         h.Calculate(imgArray);
@@ -273,6 +289,12 @@ public class ImageStorage {
         decode = h.HuffmanDecoding(encode);
         long decodeEnd = System.currentTimeMillis();
         long decodeTime = decodeEnd - decodeStart;
+
+        for(int i=0;i<processedArray.length;i++){
+            for(int j=0; j<processedArray[0].length;j++){
+                processedArray[i][j]=decode[i*processedArray.length+j];
+            }
+        }
 
         //Calculate the compression ratio
         double newLength = h.getlength();

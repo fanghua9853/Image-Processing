@@ -737,21 +737,21 @@ public class MyFrame extends JFrame{
             }
             else if(e.getSource() == HuffmanCompressionButton){
                 labeltxtHuffman.setText(imageStorage.HuffmanCompression());
-                // BufferedImage bi = imageStorage.getImagefromProcessedArray();
-                // label1.setIcon(new ImageIcon(bi));
-                // label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
             }
             else if(e.getSource() == RLCgrayscaleButton){
                 labeltxtRLCgrayscale.setText(imageStorage.RLCgrayscale());
-                // BufferedImage bi = imageStorage.getImagefromProcessedArray();
-                // label1.setIcon(new ImageIcon(bi));
-                // label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
             }
             else if(e.getSource() == RLCbitchangeButton){
                 labeltxtRLCbitchange.setText(imageStorage.RLCbitchange());
-                // BufferedImage bi = imageStorage.getImagefromProcessedArray();
-                // label1.setIcon(new ImageIcon(bi));
-                // label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
+                label1.setIcon(new ImageIcon(bi));
+                label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
             }
             
         }

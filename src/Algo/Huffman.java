@@ -148,11 +148,7 @@ public class Huffman {
 
             curr=root;
             for(int j =0; j<newArray[i].length();j++){
-                if(curr.left ==null && curr.right == null){
-            
-                ans = newArray[i];
-                }
-                if(newArray[i] == "0"){
+                if(newArray[i].charAt(j) == '0'){
                     curr = curr.left;
                 }else{
                     curr = curr.right;
