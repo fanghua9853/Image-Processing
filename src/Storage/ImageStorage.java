@@ -192,7 +192,7 @@ public class ImageStorage {
             }
         }
     } 
-    public void MSE(){
+    public double MSE(){
         double mse=0;
         for(int i=0;i<imgArray.length;i++){
             for(int j=0; j<imgArray[0].length;j++){
@@ -200,7 +200,7 @@ public class ImageStorage {
             }
         }
         mse= mse/((imgArray.length * imgArray[0].length));
-        System.out.println(mse);
+        return mse;
     }
 
     public String RLCgrayscale(){
@@ -229,10 +229,11 @@ public class ImageStorage {
 
             }
         }
+        
 
         //
         System.out.println("decode size:"+decode.size());
-        return ("RLCgrayscale Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
+        return ("RLCgrayscale Encode time: "+encodeTime+" Decode time: "+decodeTime+" Compression Ratio: "+compressionRatio+"Mean Square Error: "+MSE());
 
     }
 
@@ -268,7 +269,7 @@ public class ImageStorage {
         double compressionRatio = originalLenth/newLength;
 
         //
-        return (" RLCbitchange Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio);
+        return (" RLCbitchange Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio+"Mean Square Error: "+MSE());
 
     }
 
@@ -303,7 +304,7 @@ public class ImageStorage {
         
 
         //
-        return ("HuffmanCompression Encode time: "+encodeTime+" Decode time: "+decodeTime+" Compression Ratio: "+compressionRatio);
+        return ("HuffmanCompression Encode time: "+encodeTime+" Decode time: "+decodeTime+" Compression Ratio: "+compressionRatio+"Mean Square Error: "+MSE());
 
        
 
