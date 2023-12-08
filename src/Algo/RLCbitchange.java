@@ -79,9 +79,6 @@ public class RLCbitchange {
             decodeList[i] = Integer.parseInt(str.toString(),2);
         }
         
-        
-        
-        
         return decodeList;
     }
 

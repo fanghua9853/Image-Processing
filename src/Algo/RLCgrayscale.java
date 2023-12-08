@@ -26,11 +26,8 @@ public class RLCgrayscale {
         }
         encode.add(lastPixel);
         encode.add(count);
-        return encode;
-
-        
+        return encode;        
     }
-
 
 
     public ArrayList<Integer> DecodePixel(ArrayList<Integer> encode){

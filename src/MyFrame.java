@@ -737,7 +737,7 @@ public class MyFrame extends JFrame{
             }
             else if(e.getSource() == HuffmanCompressionButton){
                 labeltxtHuffman.setText(imageStorage.HuffmanCompression());
-                BufferedImage bi = imageStorage.getBufferedImage();
+                BufferedImage bi = imageStorage.getImagefromProcessedArray();
                 label1.setIcon(new ImageIcon(bi));
                 label1.setBounds(600, imageHeight, bi.getWidth(), bi.getHeight());
             }

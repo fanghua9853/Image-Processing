@@ -233,7 +233,7 @@ public class ImageStorage {
 
         //
         System.out.println("decode size:"+decode.size());
-        return ("RLCgrayscale Encode time: "+encodeTime+" Decode time: "+decodeTime+" Compression Ratio: "+compressionRatio+"Mean Square Error: "+MSE());
+        return ("RLCgrayscale Encode time: "+encodeTime+"  Milli Second.    Decode time: "+decodeTime+" Milli Second.     Compression Ratio: "+compressionRatio+ "    Mean Square Error: "+MSE());
 
     }
 
@@ -269,7 +269,7 @@ public class ImageStorage {
         double compressionRatio = originalLenth/newLength;
 
         //
-        return (" RLCbitchange Encode time: "+encodeTime+" Decode time: "+decodeTime+" COmpression Ratio: "+compressionRatio+"Mean Square Error: "+MSE());
+        return (" RLCbitchange Encode time: "+encodeTime+" Milli Second.    Decode time: "+decodeTime+" Milli Second.   Compression Ratio: "+compressionRatio+" Mean Square Error: "+MSE());
 
     }
 
@@ -304,7 +304,7 @@ public class ImageStorage {
         
 
         //
-        return ("HuffmanCompression Encode time: "+encodeTime+" Decode time: "+decodeTime+" Compression Ratio: "+compressionRatio+"Mean Square Error: "+MSE());
+        return ("HuffmanCompression Encode time:  "+encodeTime+" Milli Second.  Decode time: "+decodeTime+" Milli Second.  Compression Ratio: "+compressionRatio+"  Mean Square Error: "+MSE());
 
        
 
